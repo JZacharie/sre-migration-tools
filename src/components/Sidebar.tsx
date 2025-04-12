@@ -3,6 +3,31 @@ import Link from "next/link";
 import { AiFillHome, AiFillSetting} from "react-icons/ai";
 import {BsFillGridFill} from "react-icons/bs";
 import {BiSolidCategory} from "react-icons/bi";
+
+const KubernetesIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      viewBox="0 0 24 24"
+      fill="white"
+      stroke="white"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 11v10h18V11l-9-8z" />
+      <path d="M12 3v6" />
+      <path d="M3 11h18" />
+      <path d="M6 11v10" />
+      <path d="M18 11v10" />
+      <path d="M3 11l9-8 9 8" />
+      <path d="M12 3v6" />
+    </svg>
+    
+  );
+};
 import {FaCodeBranch} from "react-icons/fa";
 
 const Sidebar = () => {
@@ -31,7 +56,7 @@ const Sidebar = () => {
         </li>
         <li>
           <Link href="/kubernetes" className="hover:text-gray-300">
-            <BiSolidCategory size={30}/>
+            <KubernetesIcon/>
           </Link>
         </li>
       </ul>

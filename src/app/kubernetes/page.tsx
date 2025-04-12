@@ -2,10 +2,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import { useKubeConfig } from '../../context/KubeConfigContext';
 
 interface KubernetesObject {
   apiVersion: string;
   kind: string;
+
   metadata: {
     name: string;
     namespace?: string;
@@ -13,12 +15,22 @@ interface KubernetesObject {
 }
 
 const KubernetesPage = () => {
+  const { kubeconfig } = useKubeConfig();
   const [namespaces, setNamespaces] = useState<string[]>([]);
   const [namespaceObjects, setNamespaceObjects] = useState<{ [namespace: string]: KubernetesObject[] }>({});
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log("kubeconfig context:", kubeconfig);
+  }, [kubeconfig]);
+
+  useEffect(() => {
     const fetchNamespaces = async () => {
+      if (kubeconfig === null) {
+        setError('Kubeconfig not loaded yet.');
+        return;
+      }
+
       const kubeconfigCookie = Cookies.get('kubeconfig');
       if (!kubeconfigCookie) {
         setError('Kubeconfig not found. Please configure Kubernetes connection.');
@@ -52,6 +64,11 @@ const KubernetesPage = () => {
   }, []);
 
   const fetchNamespaceObjects = async (namespace: string) => {
+    if (kubeconfig === null) {
+      setError('Kubeconfig not loaded yet.');
+      return;
+    }
+
     const kubeconfigCookie = Cookies.get('kubeconfig');
     if (!kubeconfigCookie) {
       setError('Kubeconfig not found. Please configure Kubernetes connection.');

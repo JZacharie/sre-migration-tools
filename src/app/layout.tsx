@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
-import KubeConfigProvider from "@/context/KubeConfigContext";
+import { KubeConfigProvider } from "@/context/KubeConfigContext";
 
 import "./globals.css";
 
